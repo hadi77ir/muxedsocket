@@ -78,6 +78,19 @@ func (r *Registry[T]) Get(name string) (T, bool) {
 	return none, false
 }
 
+func (r *Registry[T]) Keys() []string {
+	if !r._initialized {
+		r.init()
+	}
+	i := 0
+	keys := make([]string, len(r.creators))
+	for k, _ := range r.creators {
+		keys[i] = k
+		i++
+	}
+	return keys
+}
+
 // Client-side maps
 
 type Creators struct {
