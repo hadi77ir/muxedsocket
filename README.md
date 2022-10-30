@@ -28,3 +28,6 @@ There are a number of design choices that I rather explain here.
 I would like to use `Context`s but the inconsistencies led to the decision to drop them in all signatures.
 As we already have `Close` for signaling the end of listening or connection lifetime, I think there is no real
 compensation for trying to implement them.
+
+## License
+Apache License 2.0 - See [LICENSE](LICENSE)
