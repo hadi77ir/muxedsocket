@@ -1,4 +1,4 @@
-module muxedsocket
+module github.com/hadi77ir/muxedsocket
 
 go 1.19
 
