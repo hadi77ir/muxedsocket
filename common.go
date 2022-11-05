@@ -47,7 +47,7 @@ func GetCommonParamsFromURL(addr *url.URL) CommonParams {
 }
 
 func GetAddrByTransportType(transportKey string, addr string) (NetAddrPort, error) {
-	sep := strings.Index(addr, ":")
+	sep := strings.LastIndex(addr, ":")
 	var ipStr string
 	var portStr string
 	if sep != -1 {
