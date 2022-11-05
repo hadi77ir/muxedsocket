@@ -2,8 +2,8 @@ package smux
 
 import (
 	"context"
+	"github.com/hadi77ir/muxedsocket"
 	S "github.com/xtaci/smux"
-	"muxedsocket"
 	"net"
 )
 

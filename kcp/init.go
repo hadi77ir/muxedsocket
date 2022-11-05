@@ -1,8 +1,8 @@
 package kcp
 
 import (
+	"github.com/hadi77ir/muxedsocket"
 	K "github.com/xtaci/kcp-go/v5"
-	"muxedsocket"
 	"net"
 )
 

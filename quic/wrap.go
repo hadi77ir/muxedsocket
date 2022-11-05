@@ -1,8 +1,8 @@
 package quic
 
 import (
+	"github.com/hadi77ir/muxedsocket"
 	Q "github.com/lucas-clemente/quic-go"
-	"muxedsocket"
 )
 
 func wrapListener(listener Q.Listener) muxedsocket.MuxedListener {

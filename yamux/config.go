@@ -1,8 +1,8 @@
 package yamux
 
 import (
+	"github.com/hadi77ir/muxedsocket"
 	S "github.com/hashicorp/yamux"
-	"muxedsocket"
 )
 
 // getConfig creates a new instance of Config, with prefilled values.

@@ -3,8 +3,8 @@ package quic
 import (
 	"context"
 	"crypto/tls"
+	"github.com/hadi77ir/muxedsocket"
 	Q "github.com/lucas-clemente/quic-go"
-	"muxedsocket"
 	"net"
 )
 

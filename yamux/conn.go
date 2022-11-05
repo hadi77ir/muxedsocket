@@ -2,8 +2,8 @@ package yamux
 
 import (
 	"context"
+	"github.com/hadi77ir/muxedsocket"
 	Y "github.com/hashicorp/yamux"
-	"muxedsocket"
 	"net"
 )
 

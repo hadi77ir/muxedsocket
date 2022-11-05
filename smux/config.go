@@ -1,8 +1,8 @@
 package smux
 
 import (
+	"github.com/hadi77ir/muxedsocket"
 	S "github.com/xtaci/smux"
-	"muxedsocket"
 )
 
 const SupportedSMuxVersion = 2

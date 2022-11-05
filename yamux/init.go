@@ -1,6 +1,6 @@
 package yamux
 
-import "muxedsocket"
+import "github.com/hadi77ir/muxedsocket"
 
 func init() {
 	muxedsocket.GlobalCreators().ClientMuxers().Register("yamux", ClientMuxer)
