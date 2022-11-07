@@ -7,7 +7,7 @@ import (
 
 func init() {
 	GlobalCreators().ChannelDialers().Register("udp", DialUDP)
-	GlobalCreators().ChannelDialers().Register("udp", ListenUDP)
+	GlobalCreators().ChannelListeners().Register("udp", ListenUDP)
 }
 
 func DialUDP(addr string) (net.PacketConn, error) {
