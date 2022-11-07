@@ -42,9 +42,20 @@ func findAndRemoveTLS(parts []string) ([]string, bool) {
 	return parts, false
 }
 func GetCommonParamsFromURL(addr *url.URL) CommonParams {
-	keepalive, _ := time.ParseDuration(addr.Query().Get("keepalive"))
-	timeout, _ := time.ParseDuration(addr.Query().Get("timeout"))
+	q := addr.Query()
+	keepalive := durationFromQuery(q, "keepalive", time.Duration(10)*time.Second)
+	timeout := durationFromQuery(q, "timeout", time.Duration(30)*time.Second)
 	return CommonParams{KeepalivePeriod: keepalive, MaxIdleTimeout: timeout}
+}
+
+func durationFromQuery(q url.Values, key string, defaultValue time.Duration) time.Duration {
+	if q.Has(key) {
+		val, err := time.ParseDuration(q.Get(key))
+		if err != nil {
+			return val
+		}
+	}
+	return defaultValue
 }
 
 func GetAddrByTransportType(transportKey string, addr string) (NetAddrPort, error) {
