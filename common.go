@@ -24,9 +24,10 @@ func remove[T any](s []T, i int) []T {
 
 func findAndRemove[T any](keys []string, registry *Registry[T]) ([]string, string, T, bool) {
 	for i := 0; i < len(keys); i++ {
-		if value, found := registry.Get(keys[i]); found {
+		key := keys[i]
+		if value, found := registry.Get(key); found {
 			keys = remove(keys, i)
-			return keys, keys[i], value, true
+			return keys, key, value, true
 		}
 	}
 	var none T
