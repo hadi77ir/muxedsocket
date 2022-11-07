@@ -17,9 +17,9 @@ func CreateListenerWithRegistry(creators *Creators, scheme string) (AddrMuxListe
 	schemeParts, _, muxListener, muxListenerFound := findAndRemove(schemeParts, creators.MuxListeners())
 
 	// try finding the packet transport in the scheme
-	schemeParts, channelDialerKey, channelDialer, channelDialerFound := findAndRemove(schemeParts, creators.ChannelDialers())
+	schemeParts, channelDialerKey, channelDialer, channelDialerFound := findAndRemove(schemeParts, creators.ChannelListeners())
 	if !channelDialerFound {
-		channelDialer, channelDialerFound = creators.ChannelDialers().Get(defaultPacketTransport)
+		channelDialer, channelDialerFound = creators.ChannelListeners().Get(defaultPacketTransport)
 	}
 	if muxListenerFound {
 		// there should not be anything remaining
