@@ -13,7 +13,7 @@ type MuxedAddr struct {
 
 // String returns a serialized string representation of struct.
 func (addr MuxedAddr) String() string {
-	return addr.String() + "#" + strconv.Itoa(addr.MuxStream)
+	return addr.Original.String() + "#" + strconv.Itoa(addr.MuxStream)
 }
 
 // Network returns network name, such as "icmp", "tcp", "udp".
