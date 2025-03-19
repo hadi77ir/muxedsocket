@@ -2,32 +2,27 @@
 This package enables use of multiple multiplexer and "stream-over-datagram" implementations with drop-in replacement
 ability.
 
-## Supports...?
-Supported implementations of multiplexer are:
-- SPDY
-- smux
-- yamux
+## Disclaimer / Project Status
+This project is still under heavy development. So until further notice:
+- Everything in this repository should be considered "Alpha-Quality Software" and therefore not used in production environments.
+- API is unstable and is subject to change.
+- Proposals for API and design changes that include drastic changes are welcome.
 
-Supported stream connection implementations are:
-- Stream-oriented protocols:
-  - TCP
-- Stream-over-packets:
-  - KCP
-  - KCP Secure (KCP with TLS)
+## Features
+- Reusability. This library is built to be completely reusable.
+- Extensible. You can extend functionality of the library and bring your own Multiplexer, Obfuscator, etc. 
+  by registering them through `Creators`.
+- Layered architecture. The library has multiple layers, which may be used independently or chained together.
+- Compatible with interfaces defined in Go Standard Library (`net.Conn` and `net.PacketConn`). To adapt your code, there
+  is little to zero modifications required.
+- Simple URI Configuration. Two functions provide you the functionality with "Listen" and "Dial" functionality,
+  and they just take a URI.
+- Stream-over-Packets: Supports Packet-oriented connections for networks where UDP is not monitored.
+- Packets-over-streams: Supports "Packets-over-streams" when Packet-oriented connections are not available and 
+  Stream-oriented connections are unstable or limited.
 
-Complete solutions:
-- QUIC
-
-When using anything other than TCP, you may use a custom `PacketConn` implementation such as `ICMPChannel` to transport 
-traffic over some exotic channel of your choice.
-
-## Design Choices
-There are a number of design choices that I rather explain here.
-
-### A note on contexts
-I would like to use `Context`s but the inconsistencies led to the decision to drop them in all signatures.
-As we already have `Close` for signaling the end of listening or connection lifetime, I think there is no real
-compensation for trying to implement them.
+## Samples
+For samples, take a look at the tests and the `everest` project.
 
 ## License
 Apache License 2.0 - See [LICENSE](LICENSE)

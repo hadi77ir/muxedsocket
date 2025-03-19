@@ -1,18 +1,22 @@
 package quic
 
 import (
-	"github.com/hadi77ir/muxedsocket"
+	"github.com/hadi77ir/muxedsocket/types"
 	Q "github.com/lucas-clemente/quic-go"
 	"net"
 	"time"
 )
 
-var _ muxedsocket.MuxStream = &Stream{}
+var _ types.MuxStream = &Stream{}
 
 type Stream struct {
 	stream     Q.Stream
-	localAddr  *muxedsocket.MuxedAddr
-	remoteAddr *muxedsocket.MuxedAddr
+	localAddr  *types.MuxedAddr
+	remoteAddr *types.MuxedAddr
+}
+
+func (s *Stream) CloseChan() <-chan struct{} {
+	return s.CloseChan()
 }
 
 func (s *Stream) Read(b []byte) (n int, err error) {

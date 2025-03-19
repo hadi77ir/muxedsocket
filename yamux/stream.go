@@ -1,18 +1,22 @@
 package yamux
 
 import (
-	"github.com/hadi77ir/muxedsocket"
+	"github.com/hadi77ir/muxedsocket/types"
 	Y "github.com/hashicorp/yamux"
 	"net"
 	"time"
 )
 
-var _ muxedsocket.MuxStream = &Stream{}
+var _ types.MuxStream = &Stream{}
 
 type Stream struct {
 	stream     *Y.Stream
 	localAddr  net.Addr
 	remoteAddr net.Addr
+}
+
+func (s *Stream) CloseChan() <-chan struct{} {
+	return s.stream.CloseChan()
 }
 
 func (s *Stream) Read(b []byte) (n int, err error) {

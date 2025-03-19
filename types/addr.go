@@ -1,9 +1,10 @@
-package muxedsocket
+package types
 
 import (
 	"net"
 	"net/netip"
 	"strconv"
+	"strings"
 )
 
 type MuxedAddr struct {
@@ -62,3 +63,52 @@ func (n netAddr) String() string {
 func (n netAddr) Zone() string {
 	return n.zone
 }
+
+func GetAddrByTransportType(transportKey string, addr string) (NetAddrPort, error) {
+	sep := strings.LastIndex(addr, ":")
+	var ipStr string
+	var portStr string
+	if sep != -1 {
+		ipStr = addr[:sep]
+		portStr = addr[sep+1:]
+	} else {
+		ipStr = addr
+		portStr = "0"
+	}
+	ip := net.ParseIP(ipStr)
+	if ip == nil {
+		return nil, net.InvalidAddrError("invalid ip address")
+	}
+	port, err := strconv.Atoi(portStr)
+	if err != nil {
+		return nil, err
+	}
+	if transportKey == "udp" {
+		return &net.UDPAddr{IP: ip, Port: port}, nil
+	}
+	if transportKey == "tcp" {
+		return &net.TCPAddr{IP: ip, Port: port}, nil
+	}
+
+	return &netAddr{
+		host:    addr,
+		port:    uint16(port),
+		network: transportKey,
+	}, nil
+}
+
+type EmptyAddr string
+
+func (e EmptyAddr) Network() string {
+	return string(e)
+}
+
+func (e EmptyAddr) String() string {
+	return string(e) + ":"
+}
+
+func (e EmptyAddr) AddrPort() netip.AddrPort {
+	return netip.MustParseAddrPort("0.0.0.0:0")
+}
+
+var _ NetAddrPort = EmptyAddr("empty")

@@ -1,13 +1,13 @@
 package smux
 
 import (
-	"github.com/hadi77ir/muxedsocket"
+	"github.com/hadi77ir/muxedsocket/types"
 	S "github.com/xtaci/smux"
 	"net"
 	"time"
 )
 
-var _ muxedsocket.MuxStream = &Stream{}
+var _ types.MuxStream = &Stream{}
 
 type Stream struct {
 	stream     *S.Stream

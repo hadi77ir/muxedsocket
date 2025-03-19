@@ -1,12 +1,12 @@
 package smux
 
 import (
-	"github.com/hadi77ir/muxedsocket"
+	"github.com/hadi77ir/muxedsocket/types"
 	"github.com/xtaci/smux"
 	"net"
 )
 
-func wrapConn(conn *smux.Session) muxedsocket.MuxedSocket {
+func wrapConn(conn *smux.Session) types.MuxedSocket {
 	return &Conn{
 		session: conn,
 	}
@@ -16,10 +16,10 @@ func wrapListener(listener net.Listener, config *smux.Config) *Listener {
 	return &Listener{listener: listener, config: config}
 }
 
-func wrapStream(stream *smux.Stream, session *smux.Session) muxedsocket.MuxStream {
+func wrapStream(stream *smux.Stream, session *smux.Session) types.MuxStream {
 	return &Stream{
 		stream:     stream,
-		localAddr:  muxedsocket.WrapAddr(session.LocalAddr(), int(stream.ID())),
-		remoteAddr: muxedsocket.WrapAddr(session.RemoteAddr(), int(stream.ID())),
+		localAddr:  types.WrapAddr(session.LocalAddr(), int(stream.ID())),
+		remoteAddr: types.WrapAddr(session.RemoteAddr(), int(stream.ID())),
 	}
 }
